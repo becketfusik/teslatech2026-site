@@ -9,15 +9,15 @@ export default function Agenda() {
     >
       <div className="mx-auto max-w-6xl px-6">
         <p className="mb-3 font-mono text-xs uppercase tracking-[0.3em] text-gold-400">
-          The Schedule
+          The schedule
         </p>
         <h2 className="font-display text-4xl text-slate-50 sm:text-5xl">
           Five days, mapped to the
           <span className="italic text-gold-400"> wheelworks of nature.</span>
         </h2>
         <p className="mt-4 max-w-2xl text-slate-400">
-          Each evening at 8:30 PM: casual social under the cabanas. Complimentary tapas;
-          beverages available for purchase. Vendor showcase Friday at 1:00 PM.
+          Each evening at 8:30 PM: casual social under the cabanas. Complimentary tapas.
+          Beverages available for purchase. Vendor showcase Friday at 1:00 PM.
         </p>
 
         <div className="mt-16 space-y-16">

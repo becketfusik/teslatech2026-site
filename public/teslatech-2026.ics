@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//TeslaTech 2026//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:teslatech-2026@teslatech2026.com
+DTSTAMP:20260101T000000Z
+DTSTART;TZID=America/Denver:20260812T130000
+DTEND;TZID=America/Denver:20260816T180000
+SUMMARY:TeslaTech 2026 — ExtraOrdinary Technology Conference
+DESCRIPTION:33rd annual conference. Five days of suppressed-science research, working hardware demonstrations, and direct contact with the inventors. Aug 12 to 16, 2026. Albuquerque, NM.
+LOCATION:Crowne Plaza Albuquerque, 1901 University Blvd NE, Albuquerque, NM 87102
+URL:https://teslatech2026.com
+STATUS:CONFIRMED
+END:VEVENT
+END:VCALENDAR

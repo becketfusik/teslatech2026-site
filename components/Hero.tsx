@@ -1,4 +1,7 @@
+import Image from 'next/image';
 import Link from 'next/link';
+import HeroCountdown from './HeroCountdown';
+import { TTN } from '@/data/content';
 
 export default function Hero() {
   return (
@@ -31,36 +34,72 @@ export default function Hero() {
         />
       </svg>
 
-      <div className="relative mx-auto max-w-6xl px-6 py-24 sm:py-32 lg:py-40">
+      <div className="relative mx-auto max-w-6xl px-6 py-20 sm:py-28 lg:py-36">
         <div className="max-w-3xl">
+          {/* TTN PRESENTS kicker */}
+          <a
+            href={TTN.url}
+            target="_blank"
+            rel="noreferrer"
+            className="mb-5 inline-flex items-center gap-2 transition hover:opacity-80"
+          >
+            <Image
+              src={TTN.logo}
+              alt={`${TTN.name} logo`}
+              width={20}
+              height={20}
+              className="h-5 w-5 object-contain"
+            />
+            <span className="ttn-wordmark text-sm tracking-wider text-slate-300">
+              {TTN.name}
+            </span>
+            <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-slate-500">
+              presents
+            </span>
+          </a>
+
           <p className="mb-4 font-mono text-xs uppercase tracking-[0.3em] text-gold-400">
             33rd Annual ExtraOrdinary Technology Conference
           </p>
+
           <h1 className="font-display text-5xl font-medium leading-[1.05] text-slate-50 sm:text-6xl lg:text-7xl">
-            The science was proven.
-            <span className="block italic text-gold-400">The patents were buried.</span>
-            <span className="block">Who gave the orders?</span>
+            Free energy. Anti-gravity. Field healing.
+            <span className="mt-2 block italic text-gold-400">
+              The conference for the technology that wasn’t supposed to survive.
+            </span>
           </h1>
+
           <p className="mt-8 max-w-2xl text-lg leading-relaxed text-slate-300 sm:text-xl">
-            Free energy. Frequency healing. Field propulsion. The breakthroughs were real —
-            documented, replicated, and then systematically erased. Tesla Tech 2026 brings
-            together the researchers who refused to stop digging.
+            Five days. Thirty researchers. Working hardware on every panel. Albuquerque,
+            August 12 to 16.
           </p>
 
-          <div className="mt-10 flex flex-wrap items-center gap-4">
+          {/* Countdown */}
+          <div className="mt-8">
+            <HeroCountdown />
+          </div>
+
+          <div className="mt-8 flex flex-wrap items-center gap-4">
             <Link
               href="#tickets"
               className="group relative inline-flex items-center gap-2 bg-gold-500 px-7 py-4 font-mono text-sm uppercase tracking-widest text-ink-950 transition hover:bg-gold-400"
             >
-              Reserve your seat
+              Reserve your seat from $74
               <span aria-hidden className="transition group-hover:translate-x-1">→</span>
             </Link>
             <Link
-              href="#agenda"
+              href="#featured"
               className="inline-flex items-center gap-2 border border-slate-700 px-7 py-4 font-mono text-sm uppercase tracking-widest text-slate-200 transition hover:border-gold-500 hover:text-gold-400"
             >
               See the lineup
             </Link>
+            <a
+              href="/teslatech-2026.ics"
+              download
+              className="inline-flex items-center gap-2 px-2 py-4 font-mono text-xs uppercase tracking-widest text-slate-400 transition hover:text-gold-400"
+            >
+              + Add to calendar
+            </a>
           </div>
 
           <dl className="mt-16 grid grid-cols-2 gap-x-8 gap-y-6 text-sm sm:grid-cols-4">

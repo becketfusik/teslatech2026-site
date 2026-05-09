@@ -6,31 +6,32 @@ export default function Pitch() {
           The premise
         </p>
         <h2 className="font-display text-4xl leading-tight text-slate-50 sm:text-5xl">
-          The suppression wasn’t an accident.
-          <span className="block italic text-gold-400">It was a policy.</span>
+          The science was proven.
+          <span className="block italic text-gold-400">The patents were buried.</span>
         </h2>
 
         <div className="mt-12 grid gap-12 text-lg leading-relaxed text-slate-300 lg:grid-cols-2">
           <div>
             <p>
-              The labs were raided. The files were seized. The inventors died broke,
-              discredited, or disappeared. We are not interested in conspiracy — we are
-              interested in engineering.
+              Free energy. Frequency healing. Field propulsion. The breakthroughs were real,
+              documented, and replicated. Then the labs were raided, the files were seized,
+              and the inventors died broke, discredited, or disappeared.
             </p>
             <p className="mt-6">
-              The science is documented. The patents are public. The replications are
-              repeatable. What was missing was a place where the researchers, the engineers,
-              and the people building the next generation of devices could come together and
-              compare notes without apology.
+              We are not interested in conspiracy. We are interested in engineering. The
+              science is documented. The patents are public. The replications are repeatable.
+              What was missing was a place where the researchers, the engineers, and the
+              people building the next generation of devices could compare notes without
+              apology.
             </p>
           </div>
           <div>
             <p>
               For five days every August, that place is Albuquerque. Thirty researchers
-              present what they have built, what they have measured, and what is still
-              open. Sessions span six tracks: Health, AntiGravity, Water, Energy, Concepts,
-              and Physics — plus the Wednesday workshop and Sunday closing on consciousness
-              and Tesla’s deeper vision.
+              present what they have built, what they have measured, and what is still open.
+              Sessions span six tracks: Health, AntiGravity, Water, Energy, Concepts, and
+              Physics. Plus the Wednesday workshop and Sunday closing on consciousness and
+              Tesla’s deeper vision.
             </p>
             <p className="mt-6">
               Bring your meter. Bring your prototype. Bring your questions.

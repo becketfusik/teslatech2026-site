@@ -6,7 +6,7 @@ export default function Hotel() {
     >
       <div className="mx-auto max-w-6xl px-6">
         <p className="mb-3 font-mono text-xs uppercase tracking-[0.3em] text-gold-400">
-          Travel & Stay
+          Travel and stay
         </p>
         <h2 className="font-display text-4xl text-slate-50 sm:text-5xl">
           Crowne Plaza Albuquerque.
@@ -17,7 +17,7 @@ export default function Hotel() {
           <div className="space-y-6 text-slate-300">
             <p className="text-lg leading-relaxed">
               Conference rooms, vendor expo, evening socials, and complimentary buffet
-              breakfast all under one roof. Book early — the special rate ends{' '}
+              breakfast all under one roof. Book early. The special rate ends{' '}
               <strong className="text-slate-50">July 31, 2026</strong>.
             </p>
 
@@ -67,23 +67,23 @@ export default function Hotel() {
             <div className="border border-slate-800 bg-ink-950 p-6">
               <h3 className="font-display text-2xl text-slate-50">Evening socials</h3>
               <p className="mt-3 text-slate-300">
-                8:30 PM each night. Cabana social under starry Albuquerque skies. Tapas
-                bar complimentary; beverages available for purchase.
+                8:30 PM each night. Cabana social under starry Albuquerque skies. Tapas bar
+                complimentary. Beverages available for purchase.
               </p>
             </div>
             <div className="border border-slate-800 bg-ink-950 p-6">
               <h3 className="font-display text-2xl text-slate-50">On-site lunch</h3>
               <p className="mt-3 text-slate-300">
-                Sandwich and soup bar provided by the hotel — around $10. So you don’t
-                have to leave the venue.
+                Sandwich and soup bar provided by the hotel at around $10. So you don’t have
+                to leave the venue.
               </p>
             </div>
             <div className="border border-slate-800 bg-ink-950 p-6">
               <h3 className="font-display text-2xl text-slate-50">
-                Friday & Saturday night entertainment
+                Friday and Saturday night entertainment
               </h3>
               <p className="mt-3 text-slate-300">
-                4 PM – 11 PM. Bar, food, music. Open to attendees and the public.
+                4 PM to 11 PM. Bar, food, music. Open to attendees and the public.
               </p>
             </div>
           </div>

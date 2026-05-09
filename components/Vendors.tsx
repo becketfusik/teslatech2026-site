@@ -16,15 +16,15 @@ export default function Vendors() {
     <section className="relative border-b border-gold-600/20 bg-ink-950 py-24 sm:py-32">
       <div className="mx-auto max-w-6xl px-6">
         <p className="mb-3 font-mono text-xs uppercase tracking-[0.3em] text-gold-400">
-          Vendor Showcase
+          Vendor showcase
         </p>
         <h2 className="font-display text-4xl text-slate-50 sm:text-5xl">
-          The expo floor —
-          <span className="italic text-gold-400"> open to the public.</span>
+          The expo floor.
+          <span className="italic text-gold-400"> Open to the public.</span>
         </h2>
         <p className="mt-4 max-w-3xl text-slate-400">
-          Friday, August 14 at 1:00 PM: vendors who aren’t presenting on stage get the floor
-          for a 5–10 minute showcase of what they brought. The exhibit hall stays open all
+          Friday, August 14 at 1:00 PM. Vendors who aren’t presenting on stage get the floor
+          for a 5 to 10 minute showcase of what they brought. The exhibit hall stays open all
           weekend.
         </p>
 
