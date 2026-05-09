@@ -131,6 +131,18 @@ export function applyDiscount(basePrice: number, tier: EarlyBirdTier | null): nu
   return Math.round(discounted);
 }
 
+// Returns the lowest "full conference access" ticket price after the active discount.
+// Excludes the Wednesday Workshop (single-day add-on) so the hero CTA price represents
+// what someone actually pays to attend the full event. As discount tiers expire, this
+// auto-updates: 20% off livestream = $79, 15% = $84, no discount = $99.
+export function getMinPaidPrice(now: Date = new Date()): number {
+  const active = getActiveEarlyBird(now);
+  const fullAccess = TICKETS.filter(
+    (t) => t.basePriceUsd > 0 && t.id !== 'workshop',
+  );
+  return Math.min(...fullAccess.map((t) => applyDiscount(t.basePriceUsd, active)));
+}
+
 // Reframed as reassurance, not a legal disclaimer.
 export const REFUND_POLICY_HEADLINE = 'Stress-free booking.';
 export const REFUND_POLICY_BODY = `Life happens. Swap your registration up to July 14, 2026 for credit toward TeslaTech goods or services. A $25 service fee applies. We don't issue cash refunds, and after July 14 registrations become non-refundable.`;

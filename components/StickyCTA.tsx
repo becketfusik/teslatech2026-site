@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { getActiveEarlyBird } from '@/data/pricing';
+import { getActiveEarlyBird, getMinPaidPrice } from '@/data/pricing';
 
 function useCountdown(targetISO: string | null) {
   const [now, setNow] = useState(() => Date.now());
@@ -23,6 +23,7 @@ export default function StickyCTA() {
   const [visible, setVisible] = useState(false);
   const active = getActiveEarlyBird();
   const countdown = useCountdown(active?.beforeISO ?? null);
+  const minPrice = getMinPaidPrice();
 
   useEffect(() => {
     const onScroll = () => {
@@ -54,7 +55,7 @@ export default function StickyCTA() {
           </div>
 
           <div className="flex flex-1 items-center justify-end gap-3 sm:flex-none">
-            <p className="hidden text-xs text-slate-300 md:block">From $74 · Aug 12–16, Albuquerque</p>
+            <p className="hidden text-xs text-slate-300 md:block">From ${minPrice} · Aug 12–16, Albuquerque</p>
             <Link
               href="#tickets"
               className="inline-flex items-center gap-2 bg-gold-500 px-5 py-2.5 font-mono text-xs uppercase tracking-widest text-ink-950 transition hover:bg-gold-400"

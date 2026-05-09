@@ -2,8 +2,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import HeroCountdown from './HeroCountdown';
 import { TTN } from '@/data/content';
+import { getMinPaidPrice } from '@/data/pricing';
 
 export default function Hero() {
+  const minPrice = getMinPaidPrice();
   return (
     <section className="relative overflow-hidden border-b border-gold-600/20 bg-arc-gradient">
       {/* Decorative SVG arcs */}
@@ -84,7 +86,7 @@ export default function Hero() {
               href="#tickets"
               className="group relative inline-flex items-center gap-2 bg-gold-500 px-7 py-4 font-mono text-sm uppercase tracking-widest text-ink-950 transition hover:bg-gold-400"
             >
-              Reserve your seat from $74
+              Reserve your seat from ${minPrice}
               <span aria-hidden className="transition group-hover:translate-x-1">→</span>
             </Link>
             <Link
