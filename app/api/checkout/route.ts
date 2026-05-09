@@ -51,6 +51,18 @@ export async function POST(req: NextRequest) {
     const active = getActiveEarlyBird();
     const finalPriceUsd = applyDiscount(ticket.basePriceUsd, active);
 
+    // Decide how to handle discounts. Stripe forbids using `discounts` and
+    // `allow_promotion_codes` on the same session — they're mutually exclusive.
+    //   - If we have a pre-created Price ID AND an active early-bird tier AND a
+    //     matching coupon ID is configured, auto-apply that coupon.
+    //   - Otherwise, allow the customer to enter a promotion code manually.
+    // (When we fall back to inline price_data, the early-bird discount is already
+    //  baked into `finalPriceUsd`, so we don't double-apply it.)
+    const couponId = active
+      ? process.env[`STRIPE_COUPON_${active.percentOff}`]
+      : undefined;
+    const shouldAutoApplyCoupon = Boolean(priceIdEnv && couponId);
+
     const session = await stripe.checkout.sessions.create({
       mode: 'payment',
       payment_method_types: ['card'],
@@ -77,12 +89,9 @@ export async function POST(req: NextRequest) {
               quantity: 1,
             },
       ],
-      // If using pre-created prices, attach a coupon for the active early-bird tier
-      // (you'd create coupons FOUNDERS25 / EARLYBIRD20 / FINAL15 in the Stripe dashboard).
-      ...(priceIdEnv && active
-        ? { discounts: [{ coupon: process.env[`STRIPE_COUPON_${active.percentOff}`] || '' }] }
-        : {}),
-      allow_promotion_codes: true,
+      ...(shouldAutoApplyCoupon
+        ? { discounts: [{ coupon: couponId! }] }
+        : { allow_promotion_codes: true }),
       metadata: {
         ticket_id: ticket.id,
         early_bird_tier: active?.label ?? 'standard',
