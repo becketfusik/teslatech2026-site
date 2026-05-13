@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import EventSchema from '@/components/EventSchema';
+import Header from '@/components/Header';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -32,7 +33,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <EventSchema />
       </head>
-      <body className="grain bg-ink-950 text-slate-100 antialiased">{children}</body>
+      <body className="grain bg-ink-950 text-slate-100 antialiased">
+        <Header />
+        {children}
+      </body>
     </html>
   );
 }

@@ -75,3 +75,10 @@ export const TTN = {
   about:
     'TTN Network is the channel partner promoting TeslaTech 2026. Our news desk will be on-site covering the conference, conducting speaker interviews, and producing post-event reporting for our audience of explorers, inventors, scientists, researchers, and the curious mind.',
 };
+
+// Livestream platform — TTN's HowTube channel hosts the live broadcast Aug 12-16.
+export const LIVESTREAM = {
+  platform: 'HowTube',
+  channelName: 'TTN Tesla Tech',
+  url: 'https://howtube.com/TTNTeslaTech',
+};

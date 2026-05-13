@@ -86,10 +86,11 @@ export const TICKETS: TicketTier[] = [
     id: 'livestream',
     name: 'Livestream Only',
     basePriceUsd: 99,
-    description: 'Watch every session online. No travel required.',
+    description: 'Watch every session online via TTN Tesla Tech on HowTube. No travel required.',
     stripePriceIdEnvKey: 'STRIPE_PRICE_LIVESTREAM',
     features: [
       'All conference sessions Aug 12–16 online',
+      'Streams via TTN Tesla Tech on HowTube',
       'Bonus interviews with Karen Elkins online',
       'Session recordings access',
     ],
