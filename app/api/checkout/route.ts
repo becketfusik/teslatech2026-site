@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
-import { TICKETS, getActiveEarlyBird, applyDiscount } from '@/data/pricing';
+import { TICKETS, getActiveEarlyBird, getTicketPrice } from '@/data/pricing';
 
 // Vercel Edge would be faster but Stripe SDK needs Node.
 export const runtime = 'nodejs';
@@ -49,19 +49,23 @@ export async function POST(req: NextRequest) {
     const priceIdEnv = process.env[ticket.stripePriceIdEnvKey];
 
     const active = getActiveEarlyBird();
-    const finalPriceUsd = applyDiscount(ticket.basePriceUsd, active);
+    // getTicketPrice returns base price for ticket.excludeFromEarlyBird, otherwise
+    // the discounted amount. This is what we charge when using inline price_data.
+    const finalPriceUsd = getTicketPrice(ticket);
 
     // Decide how to handle discounts. Stripe forbids using `discounts` and
     // `allow_promotion_codes` on the same session — they're mutually exclusive.
     //   - If we have a pre-created Price ID AND an active early-bird tier AND a
-    //     matching coupon ID is configured, auto-apply that coupon.
+    //     matching coupon ID is configured AND the ticket isn't exempt, auto-apply.
     //   - Otherwise, allow the customer to enter a promotion code manually.
-    // (When we fall back to inline price_data, the early-bird discount is already
-    //  baked into `finalPriceUsd`, so we don't double-apply it.)
+    // Tickets with excludeFromEarlyBird (e.g. Livestream) never receive auto-coupon
+    // so their displayed price always matches what Stripe charges.
     const couponId = active
       ? process.env[`STRIPE_COUPON_${active.percentOff}`]
       : undefined;
-    const shouldAutoApplyCoupon = Boolean(priceIdEnv && couponId);
+    const shouldAutoApplyCoupon = Boolean(
+      priceIdEnv && couponId && !ticket.excludeFromEarlyBird,
+    );
 
     const session = await stripe.checkout.sessions.create({
       mode: 'payment',

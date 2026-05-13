@@ -5,7 +5,7 @@ import {
   TICKETS,
   EARLY_BIRD_TIERS,
   getActiveEarlyBird,
-  applyDiscount,
+  getTicketPrice,
   REFUND_POLICY_HEADLINE,
   REFUND_POLICY_BODY,
 } from '@/data/pricing';
@@ -90,8 +90,9 @@ export default function Pricing() {
 
         <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {TICKETS.map((ticket) => {
-            const finalPrice = applyDiscount(ticket.basePriceUsd, active);
-            const showStrike = active && ticket.basePriceUsd > 0;
+            const finalPrice = getTicketPrice(ticket);
+            const showStrike =
+              active && ticket.basePriceUsd > 0 && !ticket.excludeFromEarlyBird;
             return (
               <div
                 key={ticket.id}

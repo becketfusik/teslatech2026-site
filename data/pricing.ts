@@ -11,6 +11,7 @@ export type TicketTier = {
   stripePriceIdEnvKey: string;
   popular?: boolean;
   features: string[]; // what's included
+  excludeFromEarlyBird?: boolean; // ticket never receives early-bird discount
 };
 
 export const TICKETS: TicketTier[] = [
@@ -88,6 +89,7 @@ export const TICKETS: TicketTier[] = [
     basePriceUsd: 99,
     description: 'Watch every session online via TTN Tesla Tech on HowTube. No travel required.',
     stripePriceIdEnvKey: 'STRIPE_PRICE_LIVESTREAM',
+    excludeFromEarlyBird: true,
     features: [
       'All conference sessions Aug 12–16 online',
       'Streams via TTN Tesla Tech on HowTube',
@@ -132,16 +134,23 @@ export function applyDiscount(basePrice: number, tier: EarlyBirdTier | null): nu
   return Math.round(discounted);
 }
 
-// Returns the lowest "full conference access" ticket price after the active discount.
-// Excludes the Wednesday Workshop (single-day add-on) so the hero CTA price represents
-// what someone actually pays to attend the full event. As discount tiers expire, this
-// auto-updates: 20% off livestream = $79, 15% = $84, no discount = $99.
-export function getMinPaidPrice(now: Date = new Date()): number {
+// Returns the discounted price for a specific ticket, respecting per-ticket exemptions.
+// Tickets with `excludeFromEarlyBird: true` always return their base price.
+export function getTicketPrice(ticket: TicketTier, now: Date = new Date()): number {
+  if (ticket.excludeFromEarlyBird) return ticket.basePriceUsd;
   const active = getActiveEarlyBird(now);
+  return applyDiscount(ticket.basePriceUsd, active);
+}
+
+// Returns the lowest "full conference access" ticket price.
+// Excludes the Wednesday Workshop (single-day add-on) and respects per-ticket
+// early-bird exemptions. Used by the Hero CTA and Sticky CTA so the headline
+// price is always currently-available.
+export function getMinPaidPrice(now: Date = new Date()): number {
   const fullAccess = TICKETS.filter(
     (t) => t.basePriceUsd > 0 && t.id !== 'workshop',
   );
-  return Math.min(...fullAccess.map((t) => applyDiscount(t.basePriceUsd, active)));
+  return Math.min(...fullAccess.map((t) => getTicketPrice(t, now)));
 }
 
 // Reframed as reassurance, not a legal disclaimer.

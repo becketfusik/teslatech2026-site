@@ -1,15 +1,13 @@
 import { SPEAKERS } from '@/data/speakers';
-import { TICKETS, getActiveEarlyBird, applyDiscount } from '@/data/pricing';
+import { TICKETS, getTicketPrice } from '@/data/pricing';
 
 // JSON-LD Event schema for Google search and Google Events.
 // https://developers.google.com/search/docs/appearance/structured-data/event
 export default function EventSchema() {
-  const active = getActiveEarlyBird();
-
   const offers = TICKETS.filter((t) => t.basePriceUsd > 0).map((t) => ({
     '@type': 'Offer',
     name: t.name,
-    price: applyDiscount(t.basePriceUsd, active),
+    price: getTicketPrice(t),
     priceCurrency: 'USD',
     availability: 'https://schema.org/InStock',
     url: 'https://teslatech2026.com/#tickets',
