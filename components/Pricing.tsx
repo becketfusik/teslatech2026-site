@@ -140,19 +140,35 @@ export default function Pricing() {
                   ))}
                 </ul>
 
-                <form action="/api/checkout" method="POST" className="mt-6">
-                  <input type="hidden" name="ticketId" value={ticket.id} />
-                  <button
-                    type="submit"
-                    className={`w-full px-4 py-3 font-mono text-xs uppercase tracking-widest transition ${
+                {ticket.externalUrl ? (
+                  <a
+                    href={ticket.externalUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className={`mt-6 inline-flex w-full items-center justify-center gap-2 px-4 py-3 font-mono text-xs uppercase tracking-widest transition ${
                       ticket.popular
                         ? 'bg-gold-500 text-ink-950 hover:bg-gold-400'
                         : 'border border-slate-700 text-slate-200 hover:border-gold-500 hover:text-gold-400'
                     }`}
                   >
-                    {ticket.basePriceUsd === 0 ? 'Register free' : 'Buy ticket'}
-                  </button>
-                </form>
+                    {ticket.externalButtonLabel ?? 'Buy ticket'}
+                    <span aria-hidden>↗</span>
+                  </a>
+                ) : (
+                  <form action="/api/checkout" method="POST" className="mt-6">
+                    <input type="hidden" name="ticketId" value={ticket.id} />
+                    <button
+                      type="submit"
+                      className={`w-full px-4 py-3 font-mono text-xs uppercase tracking-widest transition ${
+                        ticket.popular
+                          ? 'bg-gold-500 text-ink-950 hover:bg-gold-400'
+                          : 'border border-slate-700 text-slate-200 hover:border-gold-500 hover:text-gold-400'
+                      }`}
+                    >
+                      {ticket.basePriceUsd === 0 ? 'Register free' : 'Buy ticket'}
+                    </button>
+                  </form>
+                )}
               </div>
             );
           })}

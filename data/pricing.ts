@@ -12,6 +12,8 @@ export type TicketTier = {
   popular?: boolean;
   features: string[]; // what's included
   excludeFromEarlyBird?: boolean; // ticket never receives early-bird discount
+  externalUrl?: string; // if set, button links here instead of /api/checkout
+  externalButtonLabel?: string; // label override when externalUrl is set
 };
 
 export const TICKETS: TicketTier[] = [
@@ -90,6 +92,8 @@ export const TICKETS: TicketTier[] = [
     description: 'Watch every session online via TTN Tesla Tech on HowTube. No travel required.',
     stripePriceIdEnvKey: 'STRIPE_PRICE_LIVESTREAM',
     excludeFromEarlyBird: true,
+    externalUrl: 'https://howtube.com/TTNTeslaTech',
+    externalButtonLabel: 'Buy on HowTube',
     features: [
       'All conference sessions Aug 12–16 online',
       'Streams via TTN Tesla Tech on HowTube',
